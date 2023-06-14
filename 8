@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 100
+int nfa[MAX_LENGTH][2];
+int start_state = 0;
+int accept_state = 1;
+int simulate_nfa(char* input_string) {
+ int input_length = strlen(input_string);
+ int current_state = start_state;
+ for (int i = 0; i < input_length; i++) {
+ int symbol = (input_string[i] == 'a') ? 1 : 0;
+ int next_state = nfa[current_state][symbol];
+ if (next_state == -1) {
+ return 0; 
+ }
+ current_state = next_state;
+ }
+ return current_state == accept_state;
+}
+int main() {
+ nfa[0][0] = -1; // Reject b as the first symbol
+ nfa[0][1] = 1;
+ nfa[1][0] = 1;
+ nfa[1][1] = 1;
+ char input[MAX_LENGTH];
+ printf("Enter an input string: ");
+ scanf("%s", input);
+ printf("Input: %s\nResult: %s\n", input, simulate_nfa(input) ? "Accepted" : "Rejected");
+ return 0;
+}

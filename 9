@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 100int main() {
+ char input_string[MAX_LENGTH];
+ printf("Enter input string: ");
+ scanf("%s", input_string);
+ int string_length = strlen(input_string);
+ if (string_length > 0 && input_string[0] == '0' && input_string[string_length - 1] == '1') {
+ printf("Accepted\n");
+ } else {
+ printf("Rejected\n");
+ }
+ return 0;
+}
